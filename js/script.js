@@ -49,7 +49,7 @@ const jump = (event) => {
     setTimeout(() => {
       mario.classList.remove("jump");
       isJumping = false;
-    }, 500);
+    }, 700);
   }
 };
 
@@ -118,7 +118,7 @@ const resetPipePosition = () => {
   clearInterval(pipeAnimation);
   pipe.style.left = "100vw";
   pipePosition = gameBoard.offsetWidth;
-  let pipeSpeed = (window.innerWidth * 1) / 100;
+  let pipeSpeed = (window.innerWidth * 0.5) / 100;
    
   pipeAnimation = setInterval(() => {
     if (isGameOver) {
@@ -182,6 +182,6 @@ const updateCurrentScoreDisplay = () => {
 
 document.addEventListener("click", (event) => {if(isGameOver === true){ }else{jump();}});
 
-document.addEventListener("keydown", (event) => {if(isGameOver === true){ restartGame();}else{jump();}});
+document.addEventListener("keydown", (event) => {if(isGameOver === true){ }else{jump();}});
 
 
