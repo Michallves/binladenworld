@@ -49,7 +49,7 @@ const jump = (event) => {
     setTimeout(() => {
       mario.classList.remove("jump");
       isJumping = false;
-    }, 700);
+    }, 500);
   }
 };
 
@@ -129,7 +129,7 @@ const resetPipePosition = () => {
     }
     if (pipePosition <= -pipe.offsetWidth) {
       pipePosition = gameBoard.offsetWidth;
-      if(gameBoard.offsetWidth  < 600 ) {pipeSpeed = 4} else {pipeSpeed = 10}; // Reinicia a velocidade quando o cano reinicia
+      pipeSpeed = (window.innerWidth * 0.5) / 100;
     }
     pipe.style.left = `${pipePosition}px`;
   }, 10);
@@ -155,7 +155,7 @@ const startGameLoop = () => {
 };
 
 const countScore = () => {
-    if (pipePosition <= 10 && pipePosition > 0) {
+    if (pipePosition <= (window.innerWidth * 4) / 100 && pipePosition > (window.innerWidth * 3.4) / 100) {
         currentScore += 1; // Incrementa a pontuação
        }
        if(currentScore > score){
