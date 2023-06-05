@@ -183,7 +183,7 @@ const updateCurrentScoreDisplay = () => {
 
 
 
-document.addEventListener("click", jump);
+document.addEventListener("click", (event) => {if(isGameOver === true){ }else{jump();}});
 
 document.addEventListener("keydown", (event) => {if(isGameOver === true){ restartGame();}else{jump();}});
 
