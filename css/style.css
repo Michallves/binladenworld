@@ -1,107 +1,79 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-}
-
-.game-full-screen {
-   width: 100vw; 
-   height: 100vh; 
-   display: flex;
-   flex-direction: row;
-   margin: 0 auto;
-   position: relative;
-    overflow: hidden;
- }
-.game-board {
-    width: 100%; 
-    height: 100%; 
-    border-top: 60px solid rgb(63, 63, 63);
-    border-bottom: 60px solid rgb(63, 63, 63);
+  }
+  
+  .game-board {
+    width: 100%;
+    height: 100vh;
     margin: 0 auto;
     position: relative;
     overflow: hidden;
     background: linear-gradient(#86CEEB, #E0F6FF);
-}
-
-.column-left{
+  }
+  
+  .column-left {
     height: 100%;
     position: absolute;
-    left: 0px;
+    left: 0;
     margin-left: -110px;
-}
-
-.column-right{
+  }
+  
+  .column-right {
     height: 100%;
     position: absolute;
-    right: 0px;
+    right: 0;
     margin-right: -110px;
-}
-
-.pipe {
+  }
+  
+  .pipe {
     position: absolute;
     bottom: 0;
-    width: 100px;
-    height: 100px;
-
-}
-
-.mario{
+    width: 8vw;
+    height: 8vw;
+    right: 10vw;
+  }
+  
+  .mario {
     opacity: 0;
-    width: 150px;
+    width: 12vw;
     position: absolute;
     bottom: 0;
-    margin-left: 130px;
-}
-
-.jump{
+  }
+  
+  .jump {
     animation: jump 600ms ease-out;
-}
-
-.clouds {
+  }
+  
+  .clouds {
     position: absolute;
-    height: 30%;
-
-    margin-top: 80px;
-}
-
-@keyframes pipe-animation {
-    from{
-        right: 0px;
+    width: 40vw;
+    margin-top: 20px;
+    right: 20px;
+  }
+  
+  @keyframes pipe-animation {
+    from {
+      right: -100px;
     }
-
     to {
-        right: 100%;
+      right: 100%;
     }
-}
-
-
-
-@keyframes jump {
-    0%{
-        bottom: 0;
+  }
+  
+  @keyframes jump {
+    0% {
+      bottom: 0;
     }
-
-
     50% {
-        bottom: 220px;
+      bottom: 16vw;
     }
-    
-
-    100%{
-        bottom: 0;
+    100% {
+      bottom: 0;
     }
-}
-
-@keyframes clouds-animation {
-    from{
-        right: -40%;
-    }
-    to{
-        right: 100%;
-    }
-}
-
+  }
+  
   .game-board.game-over,
   .mario.game-over,
   .clouds.game-over,
@@ -109,12 +81,13 @@
     animation-play-state: paused;
   }
   
-  .game-start-screen {
-    display: flex;
+  .game-start-screen,
+  .game-over-screen {
+    display: none;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
@@ -123,71 +96,76 @@
     z-index: 9999;
   }
   
-  .game-start-text {
-    color: #fff;
-    font-size: 60px;
-    font-weight: bold;
-    margin-bottom: 20px;
-  }
-  
-  .start-button {
-    background-color: #ff0000;
-    color: #fff;
-    font-size: 24px;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-.game-over-screen {
-    display: none;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
+  .game-over-screen {
     z-index: 9998;
   }
   
+  .game-start-text,
   .game-over-text {
     color: #fff;
-    font-size: 60px;
+    font-size: 6vw;
     font-weight: bold;
-    margin-bottom: 20px;
+    margin-bottom: 2vw;
+    text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
   }
   
+  .start-button,
   .restart-button {
     background-color: #ff0000;
     color: #fff;
-    font-size: 24px;
-    padding: 10px 20px;
+    font-size: 3vw;
+    padding: 1vw 2vw;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    
-  }
-
-  .top-score{
-    position: absolute;
-    right: 130px;
-    top: 10px;
-    color: #fff;
-    font-size: 40px;
-    font-weight: bold;
-    text-shadow: -1px 0 black, 0 1px black,
-    1px 0 black, 0 -1px black
-  }
-
-  .div-text{
-    display: inline-block;
-    color: #fff;
-    font-size: 30px;
-    font-weight: bold;
-    margin-bottom: 20px;
   }
   
+  .top-score {
+    position: absolute;
+    right: 3vw;
+    top: 2vw;
+    color: #fff;
+    font-size: 6vw;
+    font-weight: bold;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  }
+  
+  .div-text {
+    display: flex;
+    align-items: center;
+    color: #fff;
+    font-size: 3vw;
+    font-weight: bold;
+    margin-bottom: 2vw;
+  }
+  
+  .div-text span:first-child {
+    margin-right: 1vw;
+  }
+
+  /* Responsividade para dispositivos móveis */
+  @media (max-width: 768px) {
+    .game-start-text,
+    .game-over-text {
+      font-size: 10vw;
+    }
+  
+    .start-button,
+    .restart-button {
+      font-size: 6vw;
+      padding: 2vw 4vw;
+    }
+  
+    .top-score {
+      font-size: 8vw;
+    }
+  
+    .div-text {
+      font-size: 6vw;
+      margin-bottom: 4vw;
+    }
+  
+    .div-text span:first-child {
+      margin-right: 2vw;
+    }
+  }

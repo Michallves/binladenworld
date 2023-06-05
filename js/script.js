@@ -17,6 +17,7 @@ let cloudsAnimation = null;
 let pipeAnimation = null;
 let score = 0;
 let currentScore = 0;
+startScreen.style.display = "flex";
 
 const startGame = () => {
   isGameOver = false;
@@ -54,8 +55,7 @@ const jump = (event) => {
 
 const checkCollision = () => {
   const marioPosition = +window.getComputedStyle(mario).bottom.replace("px", "");
-
-  if (pipePosition <= 220 && pipePosition > 60 && marioPosition < 110) {
+  if (pipePosition <= (window.innerWidth * 20) / 100 && pipePosition > (window.innerWidth * 8) / 100 && marioPosition < (window.innerWidth * 8) / 100) {
     isGameOver = true;
     stopGame();
   }
@@ -71,8 +71,7 @@ const stopGame = () => {
   pipe.classList.add("game-over");
   clearInterval(gameLoop);
   mario.src = "./images/game-over.png";
-  mario.style.width = "75px";
-  mario.style.marginLeft = "130px";
+  mario.style.width = "6vw";
   pipe.style.animation = "none"; // Pausa a animação do cano
   showOverScreen();
 
@@ -120,9 +119,10 @@ const resetCloudsPosition = () => {
 
 const resetPipePosition = () => {
   clearInterval(pipeAnimation);
-  pipe.style.left = "100%";
+  pipe.style.left = "100vw";
   pipePosition = gameBoard.offsetWidth;
-  let pipeSpeed = 10; // Velocidade inicial do cano
+  let pipeSpeed = 0;
+   if(gameBoard.offsetWidth  < 600 ) {pipeSpeed = 4} else {pipeSpeed = 10}; // Velocidade inicial do cano
   pipeAnimation = setInterval(() => {
     if (isGameOver) {
       pipePosition -= 0;
@@ -132,7 +132,7 @@ const resetPipePosition = () => {
     }
     if (pipePosition <= -pipe.offsetWidth) {
       pipePosition = gameBoard.offsetWidth;
-      pipeSpeed = 10; // Reinicia a velocidade quando o cano reinicia
+      if(gameBoard.offsetWidth  < 600 ) {pipeSpeed = 4} else {pipeSpeed = 10}; // Reinicia a velocidade quando o cano reinicia
     }
     pipe.style.left = `${pipePosition}px`;
   }, 10);
@@ -140,8 +140,8 @@ const resetPipePosition = () => {
 
 const resetMarioPosition = () => {
   mario.src = "./images/mario.webp";
-  mario.style.width = "150px";
-  mario.style.marginLeft = "130px";
+  mario.style.width = "12vw";
+  mario.style.marginLeft = "12vw";
   mario.style.bottom = "0";
 };
 
@@ -180,4 +180,11 @@ const updateCurrentScoreDisplay = () => {
     document.querySelector(".top-score").innerHTML = `${currentScore}`; 
 };
 
-document.addEventListener("keydown", jump);
+
+
+
+document.addEventListener("click", jump);
+
+document.addEventListener("keydown", (event) => {if(isGameOver === true){ restartGame();}else{jump();}});
+
+
