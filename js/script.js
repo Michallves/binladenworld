@@ -35,9 +35,9 @@ const startGame = () => {
   resetMarioPosition();
   resetCloudsPosition();
   startScreen.style.display = "none";
-  pipe.style.animation = "pipe-animation 2s infinite linear"; // Reinicia a animação do cano
+  pipe.style.animation = "pipe-animation 2s infinite linear"; // Inicia a animação do cano
   startGameLoop();
-  score = 0; // Reseta o score
+  resetScore();
   updateScoreDisplay(); // Atualiza o score exibido
 };
 
@@ -163,6 +163,7 @@ const resetMarioPosition = () => {
 const startGameLoop = () => {
   gameLoop = setInterval(() => {
     if (!isGameOver) {
+      gameBoard.addEventListener("click", jump);
       checkCollision();
       pipePosition = pipe.offsetLeft;
       countScore();
@@ -201,20 +202,10 @@ const updateCurrentScoreDisplay = () => {
   document.querySelector(".top-score").innerHTML = `${currentScore}`; 
 };
 
-// Evento de clique na tela (para dispositivos móveis)
-document.addEventListener("click", () => {
-  if (isGameOver === true) {
-    return;
-  } else {
-    jump();
-  }
-});
 
 // Evento de tecla pressionada (para desktop)
 document.addEventListener("keydown", (event) => {
-  if (isGameOver === true) {
-    return;
-  } else {
+  if (isGameOver != true) {
     jump();
   }
 });
