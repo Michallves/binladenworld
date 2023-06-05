@@ -74,9 +74,6 @@ const stopGame = () => {
   mario.style.width = "6vw";
   pipe.style.animation = "none"; // Pausa a animação do cano
   showOverScreen();
-
-  // Exibe o score alcançado na tela de Game Over
-  scoreDisplay.textContent = `Score: ${score}`;
 };
 
 const restartGame = () => {
@@ -92,7 +89,7 @@ const restartGame = () => {
   pipe.style.animation = "pipe-animation 2s infinite linear"; // Reinicia a animação do cano
   startGameLoop();
   resetScore();
-  updateScoreDisplay(); // Atualiza o score exibido
+
 };
 
 const showOverScreen = () => {
@@ -121,8 +118,8 @@ const resetPipePosition = () => {
   clearInterval(pipeAnimation);
   pipe.style.left = "100vw";
   pipePosition = gameBoard.offsetWidth;
-  let pipeSpeed = 0;
-   if(gameBoard.offsetWidth  < 600 ) {pipeSpeed = 4} else {pipeSpeed = 10}; // Velocidade inicial do cano
+  let pipeSpeed = (window.innerWidth * 1) / 100;
+   
   pipeAnimation = setInterval(() => {
     if (isGameOver) {
       pipePosition -= 0;
