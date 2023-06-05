@@ -19,6 +19,7 @@ let cloudsAnimation = null;
 let pipeAnimation = null;
 let score = 0;
 let currentScore = 0;
+let level = 1;
 
 // Exibindo a tela inicial do jogo
 startScreen.style.display = "flex";
@@ -31,7 +32,7 @@ const startGame = () => {
   mario.classList.remove("game-over");
   clouds.classList.remove("game-over");
   pipe.classList.remove("game-over");
-  resetPipePosition();
+  resetPipePosition((window.innerWidth * 0.5) / 100);
   resetMarioPosition();
   resetCloudsPosition();
   startScreen.style.display = "none";
@@ -77,16 +78,16 @@ const checkCollision = () => {
 const stopGame = () => {
   const marioPosition = +window.getComputedStyle(mario).bottom.replace("px", "");
   mario.style.bottom = `${marioPosition}px`;
+  mario.src = "./images/game-over.png";
+  mario.style.width = "6vw";
+  pipe.style.animation = "none";
+  showOverScreen();
+  clearInterval(gameLoop);
   isGameOver = true;
   gameBoard.classList.add("game-over");
   mario.classList.add("game-over");
   clouds.classList.add("game-over");
   pipe.classList.add("game-over");
-  clearInterval(gameLoop);
-  mario.src = "./images/game-over.png";
-  mario.style.width = "6vw";
-  pipe.style.animation = "none"; // Pausa a animação do cano
-  showOverScreen();
 };
 
 // Função para reiniciar o jogo
@@ -96,7 +97,7 @@ const restartGame = () => {
   mario.classList.remove("game-over");
   clouds.classList.remove("game-over");
   pipe.classList.remove("game-over");
-  resetPipePosition();
+  resetPipePosition((window.innerWidth * 0.5) / 100);
   resetMarioPosition();
   resetCloudsPosition();
   overScreen.style.display = "none";
@@ -130,11 +131,10 @@ const resetCloudsPosition = () => {
 };
 
 // Reposiciona o cano no início do jogo
-const resetPipePosition = () => {
+const resetPipePosition = (pipeSpeed) => {
   clearInterval(pipeAnimation);
   pipe.style.left = "100vw";
   pipePosition = gameBoard.offsetWidth;
-  let pipeSpeed = (window.innerWidth * 0.5) / 100;
 
   pipeAnimation = setInterval(() => {
     if (isGameOver) {
@@ -145,7 +145,7 @@ const resetPipePosition = () => {
     }
     if (pipePosition <= -pipe.offsetWidth) {
       pipePosition = gameBoard.offsetWidth;
-      pipeSpeed = (window.innerWidth * 0.5) / 100;
+      pipeSpeed = (window.innerWidth * 0.5) / 100 * level; // Ajusta a velocidade com base no nível
     }
     pipe.style.left = `${pipePosition}px`;
   }, 10);
@@ -177,18 +177,24 @@ const startGameLoop = () => {
 const countScore = () => {
   if (
     pipePosition <= (window.innerWidth * 4) / 100 &&
-    pipePosition > (window.innerWidth * 3.4) / 100
+    pipePosition > (window.innerWidth * 3) / 100
   ) {
     currentScore += 1; // Incrementa a pontuação
   }
   if (currentScore > score) {
     score = currentScore;
+    if (score % 10 === 0) { // Aumenta o nível a cada múltiplo de 10
+      level++;
+      const newPipeSpeed = (window.innerWidth * 0.5) / 100 * level; // Aumenta a velocidade proporcionalmente ao nível
+      resetPipePosition(newPipeSpeed);
+    }
   }
 };
 
 // Reseta o score
 const resetScore = () => {
   currentScore = 0;
+  level = 1;
 };
 
 // Atualiza o display do score
@@ -201,7 +207,6 @@ const updateCurrentScoreDisplay = () => {
   currentScoreDisplay.textContent = `${currentScore}`;
   document.querySelector(".top-score").innerHTML = `${currentScore}`; 
 };
-
 
 // Evento de tecla pressionada (para desktop)
 document.addEventListener("keydown", (event) => {
