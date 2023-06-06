@@ -153,7 +153,7 @@ const resetPipePosition = (pipeSpeed) => {
 
 // Reposiciona o Mario no início do jogo
 const resetMarioPosition = () => {
-  mario.src = "./images/mario.webp";
+  mario.src = "./images/binladen8fps.gif";
   mario.style.width = "12vw";
   mario.style.marginLeft = "12vw";
   mario.style.bottom = "0";
