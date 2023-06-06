@@ -42,7 +42,7 @@ startButton.addEventListener("click", startGame);
 
 // Função para fazer o Mario pular
 const jump = () => {
-  if (!isGameOver&&!isJumping) {
+  if (!isGameOver && !isJumping) {
     isJumping = true;
     mario.classList.add("jump");
 
@@ -58,7 +58,7 @@ const startGameLoop = () => {
   gameLoop = setInterval(() => {
     if (!isGameOver) {
       checkCollision();
-      gameBoard.addEventListener('touchstart', jump);
+      gameBoard.addEventListener("touchstart", jump);
       incrementCurrentScore();
       checkScore();
       updateCurrentScoreDisplay(); // Atualiza o score exibido
@@ -71,7 +71,9 @@ const checkCollision = () => {
   const pipeHeight = pipe.clientHeight;
   const pipeWidht = +window.getComputedStyle(pipe).width.replace("px", "");
   const collisionPosition = mario.clientLeft + mario.width + pipe.width;
-  const marioPositionHeight = +window.getComputedStyle(mario).bottom.replace("px", "");
+  const marioPositionHeight = +window
+    .getComputedStyle(mario)
+    .bottom.replace("px", "");
   if (
     pipePosition <= collisionPosition &&
     pipePosition > pipeWidht &&
@@ -85,7 +87,9 @@ const checkCollision = () => {
 const stopGame = () => {
   isGameOver = true;
   mario.src = "./images/game-over.png";
-  mario.style.bottom = `${+window.getComputedStyle(mario).bottom.replace("px", "")}px`;
+  mario.style.bottom = `${+window
+    .getComputedStyle(mario)
+    .bottom.replace("px", "")}px`;
   pipe.style.animation = "none";
   topScoreDisplay.classList.add("top-score-game-over");
   gameBoard.classList.add("game-over");
@@ -118,11 +122,11 @@ const resetGame = () => {
   isGameOver = false;
   gameBoard.classList.remove("game-over");
   topScoreDisplay.classList.remove("top-score-game-over");
-}
+};
 
 const resetOverScreen = () => {
   overScreen.style.display = "none";
-}
+};
 
 // Reposiciona as nuvens no início do jogo
 const resetClouds = () => {
@@ -173,8 +177,6 @@ const resetMario = () => {
   mario.classList.remove("game-over");
 };
 
-
-
 // Incrementa o score quando o cano passa pelo Mario
 const checkScore = () => {
   updateScore();
@@ -188,9 +190,9 @@ const checkScore = () => {
     pipeSpeed = (window.innerWidth * 1.6) / 100;
   } else if (currentScore > 10000 && currentScore <= 100000) {
     pipeSpeed = (window.innerWidth * 1.9) / 100;
-  } else  if (currentScore > 100000 && currentScore <= 1000000) {
+  } else if (currentScore > 100000 && currentScore <= 1000000) {
     pipeSpeed = (window.innerWidth * 2.2) / 100;
-  }else  if (currentScore > 1000000 ) {
+  } else if (currentScore > 1000000) {
     pipeSpeed = (window.innerWidth * 2.5) / 100;
   }
 };
@@ -200,20 +202,19 @@ updateScore = () => {
     score = currentScore;
   }
   scoreDisplay.textContent = `${score}`;
-}
+};
 
 incrementCurrentScore = () => {
-    currentScore++;
-}
+  currentScore++;
+};
 // Reseta o score
 const resetScore = () => {
   currentScore = 0;
 };
 
-
 // Atualiza o display do score atual
 const updateCurrentScoreDisplay = () => {
-  topScoreDisplay.textContent = `${currentScore}`; 
+  topScoreDisplay.textContent = `${currentScore}`;
   currentScoreDisplay.textContent = `${currentScore}`;
 };
 
@@ -221,7 +222,13 @@ const updateCurrentScoreDisplay = () => {
 document.addEventListener("keydown", (event) => {
   if (isGameOver) {
     restartGame();
-  }else if(isGameStart == true){
+  } else if (isGameStart == true) {
     jump();
   }
+});
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === 'Enter' && isGameStart == false) {
+    startGame();
+  } 
 });
