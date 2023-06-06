@@ -78,8 +78,8 @@ const checkCollision = () => {
 const stopGame = () => {
   const marioPosition = +window.getComputedStyle(mario).bottom.replace("px", "");
   mario.style.bottom = `${marioPosition}px`;
-  mario.src = "./images/game-over.png";
-  mario.style.width = "6vw";
+  mario.src = "./images/catdead.gif";
+  mario.style.width = "6w";
   pipe.style.animation = "none";
   showOverScreen();
   clearInterval(gameLoop);
