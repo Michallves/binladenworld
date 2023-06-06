@@ -58,7 +58,7 @@ const startGameLoop = () => {
   gameLoop = setInterval(() => {
     if (!isGameOver) {
       checkCollision();
-      gameBoard.addEventListener("click", jump);
+      gameBoard.addEventListener('touchstart', jump);
       incrementCurrentScore();
       checkScore();
       updateCurrentScoreDisplay(); // Atualiza o score exibido
