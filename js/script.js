@@ -82,9 +82,8 @@ const checkCollision = () => {
 // Função para parar o jogo
 const stopGame = () => {
   isGameOver = true;
-  mario.src = "./images/catdead.gif";
+  mario.src = "./images/game-over.png";
   mario.style.bottom = `${+window.getComputedStyle(mario).bottom.replace("px", "")}px`;
-  mario.style.width = "6vw";
   pipe.style.animation = "none";
   topScoreDisplay.classList.add("top-score-game-over");
   gameBoard.classList.add("game-over");
@@ -164,9 +163,8 @@ const resetPipe = () => {
 };
 
 // Reposiciona o Mario no início do jogo
-
-const resetMarioPosition = () => {
-  mario.src = "./images/binladen8fps.gif";
+const resetMario = () => {
+  mario.src = "./images/mario.webp";
   mario.style.width = "12vw";
   mario.style.left = "12vw";
   mario.style.bottom = "0";
