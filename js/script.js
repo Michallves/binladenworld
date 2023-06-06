@@ -9,6 +9,7 @@ const startScreen = document.querySelector(".game-start-screen");
 const startButton = document.querySelector(".start-button");
 const scoreDisplay = document.querySelector(".score");
 const currentScoreDisplay = document.querySelector(".current-score");
+const topScoreDisplay = document.querySelector(".top-score");
 
 // Variáveis do jogo
 let isJumping = false;
@@ -26,19 +27,12 @@ startScreen.style.display = "flex";
 
 // Função para iniciar o jogo
 const startGame = () => {
-  isGameOver = false;
-  gameBoard.classList.remove("game-over");
-  mario.style.opacity = "100";
-  mario.classList.remove("game-over");
-  clouds.classList.remove("game-over");
-  pipe.classList.remove("game-over");
   resetPipe();
   resetMario();
   resetClouds();
-  startScreen.style.display = "none";
-  pipe.style.animation = "pipe-animation 2s infinite linear"; // Inicia a animação do cano
-  startGameLoop();
   resetScore();
+  startScreen.style.display = "none";
+  startGameLoop();
 };
 
 // Evento de clique no botão de iniciar
@@ -46,10 +40,7 @@ startButton.addEventListener("click", startGame);
 
 // Função para fazer o Mario pular
 const jump = () => {
-  if (isGameOver) {
-    return; // Não permite o pulo se o jogo já acabou
-  }
-  if (!isJumping) {
+  if (!isGameOver&&!isJumping) {
     isJumping = true;
     mario.classList.add("jump");
 
@@ -58,6 +49,19 @@ const jump = () => {
       isJumping = false;
     }, 500);
   }
+};
+
+// Inicia o loop do jogo
+const startGameLoop = () => {
+  gameLoop = setInterval(() => {
+    if (!isGameOver) {
+      checkCollision();
+      gameBoard.addEventListener("click", jump);
+      incrementCurrentScore();
+      checkScore();
+      updateCurrentScoreDisplay(); // Atualiza o score exibido
+    }
+  }, 10);
 };
 
 // Verifica a colisão entre o Mario e o cano
@@ -72,7 +76,6 @@ const checkCollision = () => {
     marioPositionHeight < pipeHeight
   ) {
     stopGame();
-    isGameOver = true;
   }
 };
 
@@ -83,29 +86,25 @@ const stopGame = () => {
   mario.style.bottom = `${+window.getComputedStyle(mario).bottom.replace("px", "")}px`;
   mario.style.width = "6vw";
   pipe.style.animation = "none";
-  updateScore();
-  showOverScreen();
+  topScoreDisplay.classList.add("top-score-game-over");
   gameBoard.classList.add("game-over");
   mario.classList.add("game-over");
   clouds.classList.add("game-over");
   pipe.classList.add("game-over");
+  updateScore();
+  showOverScreen();
   clearInterval(gameLoop);
 };
 
 // Função para reiniciar o jogo
 const restartGame = () => {
-  isGameOver = false;
-  gameBoard.classList.remove("game-over");
-  mario.classList.remove("game-over");
-  clouds.classList.remove("game-over");
-  pipe.classList.remove("game-over");
+  resetGame();
   resetPipe();
   resetMario();
   resetClouds();
-  overScreen.style.display = "none";
-  pipe.style.animation = "pipe-animation 2s infinite linear"; // Reinicia a animação do cano
-  startGameLoop();
+  resetOverScreen();
   resetScore();
+  startGameLoop();
 };
 
 // Exibe a tela de fim de jogo
@@ -114,9 +113,20 @@ const showOverScreen = () => {
   restartButton.addEventListener("click", restartGame);
 };
 
+const resetGame = () => {
+  isGameOver = false;
+  gameBoard.classList.remove("game-over");
+  topScoreDisplay.classList.remove("top-score-game-over");
+}
+
+const resetOverScreen = () => {
+  overScreen.style.display = "none";
+}
+
 // Reposiciona as nuvens no início do jogo
 const resetClouds = () => {
   clearInterval(cloudsAnimation);
+  clouds.classList.remove("game-over");
   clouds.style.left = "100%";
   cloudsPosition = gameBoard.offsetWidth;
   cloudsAnimation = setInterval(() => {
@@ -135,6 +145,8 @@ const resetClouds = () => {
 // Reposiciona o cano no início do jogo
 const resetPipe = () => {
   clearInterval(pipeAnimation);
+  pipe.classList.remove("game-over");
+  pipe.style.animation = "pipe-animation 2s infinite linear";
   pipe.style.left = "100vw";
   pipePosition = gameBoard.offsetWidth;
 
@@ -155,22 +167,12 @@ const resetPipe = () => {
 const resetMario = () => {
   mario.src = "./images/mario.webp";
   mario.style.width = "12vw";
-  mario.style.marginLeft = "12vw";
+  mario.style.left = "12vw";
   mario.style.bottom = "0";
+  mario.classList.remove("game-over");
 };
 
-// Inicia o loop do jogo
-const startGameLoop = () => {
-  gameLoop = setInterval(() => {
-    if (!isGameOver) {
-      checkCollision();
-      gameBoard.addEventListener("click", jump);
-      incrementCurrentScore();
-      checkScore();
-      updateCurrentScoreDisplay(); // Atualiza o score exibido
-    }
-  }, 10);
-};
+
 
 // Incrementa o score quando o cano passa pelo Mario
 const checkScore = () => {
@@ -210,8 +212,8 @@ const resetScore = () => {
 
 // Atualiza o display do score atual
 const updateCurrentScoreDisplay = () => {
+  topScoreDisplay.textContent = `${currentScore}`; 
   currentScoreDisplay.textContent = `${currentScore}`;
-  document.querySelector(".top-score").innerHTML = `${currentScore}`; 
 };
 
 // Evento de tecla pressionada (para desktop)

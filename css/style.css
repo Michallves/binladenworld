@@ -32,18 +32,17 @@
 }
 
 .pipe {
-  
   position: absolute;
   bottom: 0;
   width: 8vw;
   height: 8vw;
-  right: 10vw;
+  right: -8vw;
 }
 
 .mario {
-  opacity: 0;
   width: 12vw;
   position: absolute;
+  left: 12vw;
   bottom: 0;
 }
 
@@ -56,15 +55,26 @@
   width: 40vw;
   margin-top: 20px;
   right: 20px;
+  animation: clouds-animation 20s infinite linear;
 }
 
 /* Animações */
 @keyframes pipe-animation {
   from {
-    right: -100px;
+    right: -8vw;
   }
   to {
-    right: 100%;
+    right: 100vw;
+  }
+}
+
+/* Animações */
+@keyframes clouds-animation {
+  from {
+    right: -40vw;
+  }
+  to {
+    right: 100vw;
   }
 }
 
@@ -87,6 +97,7 @@
 .pipe.game-over {
   animation-play-state: paused;
 }
+
 
 /* Telas de início e fim de jogo */
 .game-start-screen,
@@ -114,20 +125,29 @@
   color: #fff;
   font-size: 6vw;
   font-weight: bold;
-  margin-bottom: 2vw;
   text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
 }
 
 /* Botões de início e reinício do jogo */
-.start-button,
-.restart-button {
-  background-color: #ff0000;
+.start-button{
+  background-color: #2f9e3f;
   color: #fff;
   font-size: 3vw;
   padding: 1vw 2vw;
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  margin-top: 50px;
+}
+.restart-button {
+  background-color: #cf1a20;
+  color: #fff;
+  font-size: 3vw;
+  padding: 1vw 2vw;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 50px;
 }
 
 /* Pontuação máxima */
@@ -141,6 +161,11 @@
   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
 
+.top-score-game-over{
+  font-size: 0;
+ }
+
+
 /* Div de texto */
 .div-text {
   display: flex;
@@ -148,7 +173,7 @@
   color: #fff;
   font-size: 3vw;
   font-weight: bold;
-  margin-bottom: 2vw;
+  margin-top: 20px;
   text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
 }
 
@@ -169,9 +194,6 @@
     padding: 2vw 4vw;
   }
 
-  .top-score {
-    font-size: 8vw;
-  }
 
   .div-text {
     font-size: 6vw;
