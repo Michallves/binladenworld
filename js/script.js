@@ -217,7 +217,9 @@ const updateCurrentScoreDisplay = () => {
 
 // Evento de tecla pressionada (para desktop)
 document.addEventListener("keydown", (event) => {
-  if (isGameOver != true) {
+  if (isGameOver) {
+    restartGame();
+  }else{
     jump();
   }
 });
