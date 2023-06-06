@@ -78,8 +78,8 @@ const checkCollision = () => {
 
 // Função para parar o jogo
 const stopGame = () => {
-  mario.src = "./images/game-over.png";
   isGameOver = true;
+  mario.src = "./images/game-over.png";
   mario.style.bottom = `${+window.getComputedStyle(mario).bottom.replace("px", "")}px`;
   mario.style.width = "6vw";
   pipe.style.animation = "none";
