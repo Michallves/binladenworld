@@ -174,10 +174,7 @@ const startGameLoop = () => {
 
 // Incrementa o score quando o cano passa pelo Mario
 const checkScore = () => {
-  const collisionPosition = mario.clientLeft + mario.width + pipe.width;
   updateScore();
-
-
   if (currentScore >= 0 && currentScore <= 1000) {
     pipeSpeed = (window.innerWidth * 0.7) / 100;
   } else if (currentScore > 1000 && currentScore <= 2000) {
@@ -203,9 +200,7 @@ updateScore = () => {
 }
 
 incrementCurrentScore = () => {
-
     currentScore++;
-
 }
 // Reseta o score
 const resetScore = () => {
