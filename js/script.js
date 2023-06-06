@@ -63,7 +63,7 @@ const jump = () => {
 // Verifica a colisão entre o Mario e o cano
 const checkCollision = () => {
   const pipeHeight = pipe.clientHeight;
-  const pipeWidht = pipe.clientWidth;
+  const pipeWidht = +window.getComputedStyle(pipe).width.replace("px", "");
   const collisionPosition = mario.clientLeft + mario.width + pipe.width;
   const marioPositionHeight = +window.getComputedStyle(mario).bottom.replace("px", "");
   if (
@@ -78,10 +78,10 @@ const checkCollision = () => {
 
 // Função para parar o jogo
 const stopGame = () => {
+  mario.src = "./images/game-over.png";
   isGameOver = true;
   clearInterval(gameLoop);
   mario.style.bottom = `${+window.getComputedStyle(mario).bottom.replace("px", "")}px`;
-  mario.src = "./images/game-over.png";
   mario.style.width = "6vw";
   pipe.style.animation = "none";
   updateScore();
