@@ -13,6 +13,7 @@ const topScoreDisplay = document.querySelector(".top-score");
 
 // Variáveis do jogo
 let isJumping = false;
+let isGameStart = false;
 let isGameOver = false;
 let gameLoop = null;
 let pipePosition = 0;
@@ -27,6 +28,7 @@ startScreen.style.display = "flex";
 
 // Função para iniciar o jogo
 const startGame = () => {
+  isGameStart = true;
   resetPipe();
   resetMario();
   resetClouds();
@@ -219,7 +221,7 @@ const updateCurrentScoreDisplay = () => {
 document.addEventListener("keydown", (event) => {
   if (isGameOver) {
     restartGame();
-  }else{
+  }else if(isGameStart == true){
     jump();
   }
 });
