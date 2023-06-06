@@ -80,7 +80,6 @@ const checkCollision = () => {
 const stopGame = () => {
   mario.src = "./images/game-over.png";
   isGameOver = true;
-  clearInterval(gameLoop);
   mario.style.bottom = `${+window.getComputedStyle(mario).bottom.replace("px", "")}px`;
   mario.style.width = "6vw";
   pipe.style.animation = "none";
@@ -90,6 +89,7 @@ const stopGame = () => {
   mario.classList.add("game-over");
   clouds.classList.add("game-over");
   pipe.classList.add("game-over");
+  clearInterval(gameLoop);
 };
 
 // Função para reiniciar o jogo
