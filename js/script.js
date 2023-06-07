@@ -49,7 +49,7 @@ const jump = () => {
     setTimeout(() => {
       mario.classList.remove("jump");
       isJumping = false;
-    }, 500);
+    }, 700);
   }
 };
 
