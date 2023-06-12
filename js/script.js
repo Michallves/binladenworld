@@ -10,6 +10,8 @@ const startButton = document.querySelector(".start-button");
 const scoreDisplay = document.querySelector(".score");
 const currentScoreDisplay = document.querySelector(".current-score");
 const topScoreDisplay = document.querySelector(".top-score");
+const miado = document.getElementById("miado");
+const scoreAudio = document.getElementById("score");
 
 // Variáveis do jogo
 let isJumping = false;
@@ -80,6 +82,8 @@ const checkCollision = () => {
     marioPositionHeight < pipeHeight
   ) {
     stopGame();
+
+    miado.play();
   }
 };
 
@@ -184,19 +188,40 @@ const checkScore = () => {
   updateScore();
   if (currentScore >= 0 && currentScore <= 1000) {
     pipeSpeed = (window.innerWidth * 0.6) / 100;
+    if (currentScore == 1000) {
+      scoreAudio.play();
+    }
   } else if (currentScore > 1000 && currentScore <= 2000) {
     pipeSpeed = (window.innerWidth * 0.9) / 100;
+    if (currentScore == 2000) {
+      scoreAudio.play();
+    }
   } else if (currentScore > 2000 && currentScore <= 5000) {
     pipe.style.height = "12vw";
     pipe.style.width = "8vw";
+    if (currentScore == 5000) {
+      scoreAudio.play();
+    }
   } else if (currentScore > 5000 && currentScore <= 10000) {
     pipeSpeed = (window.innerWidth * 1.2) / 100;
+    if (currentScore == 10000) {
+      scoreAudio.play();
+    }
   } else if (currentScore > 10000 && currentScore <= 100000) {
     pipeSpeed = (window.innerWidth * 1.5) / 100;
+    if (currentScore == 100000) {
+      scoreAudio.play();
+    }
   } else if (currentScore > 100000 && currentScore <= 1000000) {
     pipeSpeed = (window.innerWidth * 1.8) / 100;
+    if (currentScore == 1000000) {
+      scoreAudio.play();
+    }
   } else if (currentScore > 1000000) {
     pipeSpeed = (window.innerWidth * 2.1) / 100;
+    if (currentScore == 1000000) {
+      scoreAudio.play();
+    }
   }
 };
 
@@ -231,7 +256,7 @@ document.addEventListener("keydown", (event) => {
 });
 
 document.addEventListener("keydown", (event) => {
-  if (event.key === 'Enter' && isGameStart == false) {
+  if (event.key === "Enter" && isGameStart == false) {
     startGame();
-  } 
+  }
 });
