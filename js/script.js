@@ -189,15 +189,14 @@ const checkScore = () => {
   } else if (currentScore > 2000 && currentScore <= 5000) {
     pipe.style.height = "12vw";
     pipe.style.width = "8vw";
-    pipeSpeed = (window.innerWidth * 1.2) / 100;
   } else if (currentScore > 5000 && currentScore <= 10000) {
-    pipeSpeed = (window.innerWidth * 1.5) / 100;
+    pipeSpeed = (window.innerWidth * 1.2) / 100;
   } else if (currentScore > 10000 && currentScore <= 100000) {
-    pipeSpeed = (window.innerWidth * 1.8) / 100;
+    pipeSpeed = (window.innerWidth * 1.5) / 100;
   } else if (currentScore > 100000 && currentScore <= 1000000) {
-    pipeSpeed = (window.innerWidth * 2.1) / 100;
+    pipeSpeed = (window.innerWidth * 1.8) / 100;
   } else if (currentScore > 1000000) {
-    pipeSpeed = (window.innerWidth * 2.4) / 100;
+    pipeSpeed = (window.innerWidth * 2.1) / 100;
   }
 };
 
