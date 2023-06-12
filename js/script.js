@@ -153,6 +153,8 @@ const resetPipe = () => {
   pipe.classList.remove("game-over");
   pipe.style.animation = "pipe-animation 2s infinite linear";
   pipe.style.left = "100vw";
+  pipe.style.height = "8vw";
+  pipe.style.width = "6vw";
   pipePosition = gameBoard.offsetWidth;
 
   pipeAnimation = setInterval(() => {
@@ -181,19 +183,21 @@ const resetMario = () => {
 const checkScore = () => {
   updateScore();
   if (currentScore >= 0 && currentScore <= 1000) {
-    pipeSpeed = (window.innerWidth * 0.7) / 100;
+    pipeSpeed = (window.innerWidth * 0.6) / 100;
   } else if (currentScore > 1000 && currentScore <= 2000) {
-    pipeSpeed = (window.innerWidth * 1) / 100;
+    pipeSpeed = (window.innerWidth * 0.9) / 100;
   } else if (currentScore > 2000 && currentScore <= 5000) {
-    pipeSpeed = (window.innerWidth * 1.3) / 100;
+    pipe.style.height = "12vw";
+    pipe.style.width = "8vw";
+    pipeSpeed = (window.innerWidth * 1.2) / 100;
   } else if (currentScore > 5000 && currentScore <= 10000) {
-    pipeSpeed = (window.innerWidth * 1.6) / 100;
+    pipeSpeed = (window.innerWidth * 1.5) / 100;
   } else if (currentScore > 10000 && currentScore <= 100000) {
-    pipeSpeed = (window.innerWidth * 1.9) / 100;
+    pipeSpeed = (window.innerWidth * 1.8) / 100;
   } else if (currentScore > 100000 && currentScore <= 1000000) {
-    pipeSpeed = (window.innerWidth * 2.2) / 100;
+    pipeSpeed = (window.innerWidth * 2.1) / 100;
   } else if (currentScore > 1000000) {
-    pipeSpeed = (window.innerWidth * 2.5) / 100;
+    pipeSpeed = (window.innerWidth * 2.4) / 100;
   }
 };
 
