@@ -191,10 +191,18 @@
 .version {
   position: absolute;
   right: 20px;
-  bottom: 20px;
+  bottom: 10px;
   font-size: 1vw;
   color: #fff;
   text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
+}
+
+.encode{
+  position: absolute;
+  bottom: 10px;
+  left: 20px;
+  color: #2f9e3f;
+  font-size: 2vw;
 }
 
 /* Responsividade para dispositivos móveis */
@@ -228,5 +236,8 @@
     font-size: 3vw;
   }
 
+  .encode{
+    font-size: 5vw;
+  }
 }
 
