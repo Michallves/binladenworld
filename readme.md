@@ -19,7 +19,7 @@ Este jogo foi desenvolvido utilizando as seguintes tecnologias:
 - JavaScript
 
 ## Como executar o jogo 
-1. Você pode acessar o jogo Bin Laden World através do seguinte link: [Jogue o Bin Laden World](https://binladenworld.web.app/)
+Você pode acessar o jogo Bin Laden World através do seguinte link: [Jogue o Bin Laden World](https://binladenworld.web.app/)
 
 ## Contribuindo
 Se você deseja contribuir com o projeto Bin Laden World, fique à vontade para clonar o repositório, fazer melhorias e enviar um pull request. Sua contribuição será muito bem-vinda!
@@ -28,6 +28,6 @@ Se você deseja contribuir com o projeto Bin Laden World, fique à vontade para 
 Este projeto é distribuído sob a licença [MIT](LICENSE).
 
 ## Créditos
-Este jogo foi desenvolvido como uma homenagem ao gato Bin Laden, um dos queridos mascotes do nosso instituto IFCE.
+Este jogo foi desenvolvido como uma homenagem ao gato Bin Laden, um dos queridos mascotes do nosso instituto IFCE Campus Canindé.
 
 Divirta-se jogando Bin Laden World e homenageando nosso amado Bin Laden!
